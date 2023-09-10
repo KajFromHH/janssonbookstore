@@ -10,12 +10,13 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
-	private Long id;
 	// NOTE! Spring boot software will NOT accept private int id;
 
-	private String firstName;
-	private String lastName;
-	private String email;
+	private String title;
+	private String author;
+	private String isbn;
+	private long publicationYear;
+	private long price;
 
 	public Book() {
 		super();
@@ -23,47 +24,53 @@ public class Book {
 
 	// Mandatory for Spring boot. Without constructor + parameters,
 	// then Spring boot will crash.
-	public Book(String firstName, String lastName, String email) {
+	public Book(String title, String author, String isbn, long publicationYear, long price) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
+		this.title = title;
+		this.author = author;
+		this.isbn = isbn;
+		this.publicationYear = publicationYear;
+		this.price = price;
 	}
 
-	public Long getId() {
-		return id;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
-	public String getEmail() {
-		return email;
+	public long getPublicationYear() {
+		return publicationYear;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPublicationYear(long publicationYear) {
+		this.publicationYear = publicationYear;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+	public long getPrice() {
+		return price;
 	}
+
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
 }

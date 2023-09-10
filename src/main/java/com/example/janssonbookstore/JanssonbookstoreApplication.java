@@ -21,9 +21,9 @@ public class JanssonbookstoreApplication {
 	@Bean
 	public CommandLineRunner bookDemo(BookRepository repository) {
 		return (args) -> {
-			log.info("save a couple of students");
-			repository.save(new Book("John", "Johnson", "john@john.com"));
-			repository.save(new Book("Katy", "Kateson", "kate@kate.com"));
+			log.info("save a couple of books");
+			repository.save(new Book("Lord of The Rings", "J.R.R.Tolkien", "975-952-80-8888-9", 1954, 30));
+			repository.save(new Book("Player Piano", "Kurt Vonnegut", "988-944-73-7777-8", 1952, 18));
 
 			log.info("fetch all books");
 			for (Book book : repository.findAll()) {
