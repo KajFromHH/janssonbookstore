@@ -7,10 +7,27 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Book {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	long id;
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	// NOTE! Spring boot software will NOT accept private int id;
+
+	// Also, even though I don't the id-value for the output (or printing)
+	// of books, id-value is still mandatory for tables, ESPECIALLY
+	// in delete and add operations (exercise 3).
+	// Without id-value, everything will crash.
+
+	// Since id-values are generated automatically by the application,
+	// it doesn't need to be added to constructor (nor should it).
 
 	private String title;
 	private String author;
