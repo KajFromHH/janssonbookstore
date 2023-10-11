@@ -1,3 +1,5 @@
+//Jansson bookstore
+
 package com.example.janssonbookstore.domain;
 
 import java.util.List;

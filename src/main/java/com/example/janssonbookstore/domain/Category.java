@@ -1,8 +1,8 @@
+//Jansson bookstore
+
 package com.example.janssonbookstore.domain;
 
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -18,9 +18,6 @@ public class Category {
 	private long categoryId;
 	private String categoryName;
 
-	// REST and database, One-to-many relation to Category.java
-	// with IgnoreJSON annotation to stop looping
-	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Book> books;
 

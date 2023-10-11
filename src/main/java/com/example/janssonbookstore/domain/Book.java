@@ -1,4 +1,8 @@
+//Jansson bookstore
+
 package com.example.janssonbookstore.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,7 +42,9 @@ public class Book {
 	private long price;
 
 	// Database part 2, Many-to-one relation to Book.java
+	// with JsonIgnore annotation to stop looping
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "categoryId")
 	private Category category;
 

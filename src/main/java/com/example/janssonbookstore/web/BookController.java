@@ -1,9 +1,12 @@
+//Jansson bookstore
+
 package com.example.janssonbookstore.web;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,12 @@ public class BookController {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+	// Show login page.
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
+	}
 
 	// List all books. For Front-end side/ websites presentation,
 	// Model model is mandatory.
@@ -43,7 +52,8 @@ public class BookController {
 		return repository.findById(bookId);
 	}
 
-	// Add new book
+	// Add new book. Requires ADMIN -rights.
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = { "/add" })
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
@@ -51,14 +61,15 @@ public class BookController {
 		return "addbook";
 	}
 
-	// Save new or edited book
+	// Save new or edited book.
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveBook(Book book) {
 		repository.save(book);
 		return "redirect:booklist";
 	}
 
-	// Edit current book
+	// Edit current book. Requires ADMIN-rights.
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", repository.findById(bookId));
@@ -66,7 +77,8 @@ public class BookController {
 		return "editbook";
 	}
 
-	// Delete books
+	// Delete books. Requires ADMIN -rights.
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		repository.deleteById(bookId);
